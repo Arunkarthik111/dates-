@@ -1,0 +1,820 @@
+:root {
+    --primary: #5c3a21;
+    --secondary: #b88b4a;
+    --accent: #a47430;
+    --light-bg: #fefcf9;
+    --text-light: #ffffff;
+    --shadow: 0 2px 8px rgba(0,0,0,0.1);
+    --bg-light: #fefcf9;
+    --text-dark: #2a1810;  /* Darker for better contrast */
+    --spacing: 2rem;
+    --container-width: min(1200px, 95%);
+    --spacing-sm: 10px;
+    --spacing-md: 20px;
+    --spacing-lg: 40px;
+    --border-radius-sm: 4px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 25px;
+    --spacing-mobile: 15px;
+}
+
+/* Reset and Base Styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    background: var(--light-bg);
+    color: var(--primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* Header and Navigation */
+header {
+    background: var(--primary);
+    padding: var(--spacing) 0;
+}
+
+.header-content {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 var(--spacing);
+}
+
+nav {
+    max-width: var(--container-width);
+    margin: 1rem auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 var(--spacing);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.menu-toggle {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        width: 30px;
+        height: 25px;
+        cursor: pointer;
+    }
+
+    .menu-toggle span {
+        display: block;
+        width: 100%;
+        height: 3px;
+        background: white;
+        margin: 5px 0;
+        transition: 0.3s;
+    }
+
+    nav {
+        display: none;
+    }
+
+    nav.active {
+        display: flex;
+    }
+}
+
+/* Enhanced Product Cards */
+.product {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.image-container {
+    position: relative;
+    padding-top: 75%; /* 4:3 Aspect Ratio */
+    overflow: hidden;
+}
+
+.image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.product-info {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-grow: 1;
+}
+
+.product h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--primary);
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stars {
+    color: #ffd700;
+}
+
+.price {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--secondary);
+    margin: 0;
+}
+
+.shop-btn {
+    width: 100%;
+    margin-top: auto;
+}
+
+/* Improved Buttons */
+.shop-btn {
+    background: var(--secondary);
+    color: var(--text-light);
+    padding: 15px 35px;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+}
+
+.shop-btn:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+/* Enhanced Modal */
+.modal {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    animation: slideIn 0.3s ease;
+}
+
+/* Testimonials Carousel */
+.testimonials-carousel {
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 40px 20px;
+}
+
+.testimonial {
+    scroll-snap-align: start;
+    min-width: 300px;
+    transform: translateY(var(--translate-y, 0));
+}
+
+.testimonial:nth-child(odd) {
+    --translate-y: 40px;
+}
+
+/* Animations */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* New Features Styles */
+.whatsapp-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #25D366;
+    color: white;
+    padding: 12px;
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+.newsletter-popup {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    z-index: 1000;
+    transform: translate(-50%, -50%) rotate(-2deg);
+}
+
+.countdown-timer {
+    background: #ff6b6b;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+/* Animation classes */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s, transform 0.6s;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Product zoom effect */
+.product-image-zoom {
+    position: relative;
+    overflow: hidden;
+}
+
+.product-image-zoom img:hover {
+    transform: scale(1.5);
+}
+
+/* Diagonal sections */
+.cta {
+    position: relative;
+    padding: 80px 20px;
+    clip-path: polygon(0 0, 100% 20px, 100% 100%, 0 calc(100% - 20px));
+    margin: 40px 0;
+}
+
+/* Asymmetrical hero section */
+.hero {
+    height: 90vh;
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+}
+
+.hero-content {
+    transform: translateX(-5%);
+    text-align: left;
+    padding: 40px;
+}
+
+/* Section for products */
+.section#products {
+    max-width: var(--container-width);
+    margin: var(--spacing-lg) auto;
+    padding: 0 var(--spacing-md);
+    text-align: center;
+}
+
+.products-wrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 40px 0;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1000px;
+    width: 100%;
+}
+
+@media (max-width: 992px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Product */
+.product {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    max-width: 300px;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+}
+
+/* Product Image Container */
+.image-container {
+    position: relative;
+    width: 100%;
+    padding-top: 75%; /* 4:3 Aspect Ratio */
+    overflow: hidden;
+}
+
+.image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+/* Product Information */
+.product-info {
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-sm);
+    flex-grow: 1;
+}
+
+.product h3 {
+    text-align: center;
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--primary);
+}
+
+.rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+}
+
+.price {
+    text-align: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--secondary);
+    margin: var(--spacing-sm) 0;
+}
+
+/* Shop Button */
+.shop-btn {
+    width: 80%;
+    margin: var(--spacing-sm) auto;
+    padding: var(--spacing-sm) var(--spacing-md);
+}
+
+/* Grid Layout */
+.section {
+    max-width: var(--container-width);
+    margin: var(--spacing) auto;
+    padding: 0 var(--spacing);
+}
+
+/* Benefits Section */
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing);
+    margin: var(--spacing) 0;
+}
+
+/* Testimonials */
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing);
+    margin: var(--spacing) 0;
+}
+
+/* Form Layout */
+.contact-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: var(--spacing);
+}
+
+/* Contact Section */
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-lg);
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: var(--spacing-lg);
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+}
+
+.contact-details p {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius-sm);
+}
+
+.submit-btn {
+    background: var(--primary);
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background: var(--accent);
+}
+
+@media (max-width: 768px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+        padding: var(--spacing-mobile);
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+        width: 100%;
+    }
+}
+
+/* Testimonials Section */
+.section#testimonials {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.testimonials-carousel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin: 40px auto;
+    max-width: 1000px;
+    overflow: visible;
+    padding: 20px 0;
+}
+
+.testimonial {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: left;
+    margin: 0 auto;
+    max-width: 300px;
+    width: 100%;
+}
+
+.testimonial-avatar {
+    margin: 0 auto 20px;
+    width: 60px;
+    height: 60px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .products-grid,
+    .testimonials-carousel {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 800px;
+    }
+}
+
+@media (max-width: 768px) {
+    .products-grid,
+    .testimonials-carousel,
+    .benefits-grid {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+    }
+    
+    .search-filters {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    header {
+        padding: var(--spacing-mobile);
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .hero-content {
+        padding: 40px var(--spacing-mobile);
+    }
+
+    .products-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: var(--spacing-mobile);
+    }
+
+    .product {
+        max-width: 100%;
+    }
+
+    .search-filters {
+        flex-direction: column;
+        padding: var(--spacing-mobile);
+    }
+
+    .search-container {
+        width: 100%;
+    }
+
+    .testimonials-carousel {
+        grid-template-columns: 1fr;
+        padding: var(--spacing-mobile);
+    }
+
+    .testimonial {
+        max-width: 100%;
+    }
+
+    .shop-btn,
+    .quick-view-btn {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+    }
+
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+    }
+
+    button,
+    .nav-link,
+    .social-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    select,
+    input {
+        height: 44px;
+    }
+
+    h1 { font-size: 24px; }
+    h2 { font-size: 20px; }
+    h3 { font-size: 18px; }
+    p { font-size: 16px; }
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        margin: 10px;
+        padding: 15px;
+    }
+}
+
+/* Add after existing styles */
+.hero-pattern {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 45%, var(--secondary) 45%, var(--secondary) 55%, transparent 55%);
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        45deg,
+        var(--bg-light) 0px,
+        var(--bg-light) 10px,
+        transparent 10px,
+        transparent 20px
+    );
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid var(--primary);
+    border-top: 5px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Social Buttons */
+.social-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.social-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.social-btn:hover {
+    transform: translateY(-3px);
+}
+
+.social-btn.facebook {
+    background: #1877f2;
+    color: white;
+}
+
+.social-btn.twitter {
+    background: #1da1f2;
+    color: white;
+}
+
+.social-btn.whatsapp {
+    background: #25d366;
+    color: white;
+}
+
+/* Recipe Cards */
+.recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg) 0;
+}
+
+.recipe-card {
+    background: white;
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease;
+}
+
+.recipe-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Progress Bars */
+.progress-container {
+    margin: 20px 0;
+}
+
+.progress-bar {
+    height: 25px;
+    background: #eee;
+    border-radius: 25px;
+    overflow: hidden;
+}
+
+.progress {
+    height: 100%;
+    background: var(--primary);
+    transition: width 1s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+/* WhatsApp Floating Button */
+.whatsapp-float {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    background-color: #25D366;
+    color: #FFF;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.whatsapp-float .tooltip {
+    position: absolute;
+    right: 70px;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.whatsapp-float:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 25px;
+    }
+}

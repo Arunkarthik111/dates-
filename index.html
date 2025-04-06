@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Discover sustainable date seed products - tea powder, face masks, and energy bars. Transform waste into wellness with our eco-friendly solutions.">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Date Seed Power - Sustainable Wellness Products">
+    <meta property="og:description" content="Transform waste into wellness with our innovative date seed products">
+    <meta property="og:image" content="https://yourdomain.com/images/og-image.jpg">
+    <meta property="og:url" content="https://yourdomain.com">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <title>Date Seed Power | Sustainable Wellness Products</title>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            scroll-padding-top: 70px;
+            font-family: Arial, sans-serif;
+            background: #fefcf9;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: #5c3a21;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .menu-toggle {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: white;
+        }
+
+        .header-content {
+            text-align: center;
+        }
+
+        nav {
+            background: #b88b4a;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .cart-icon {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .cart-count {
+            background: white;
+            color: #b88b4a;
+            padding: 2px 5px;
+            border-radius: 50%;
+            font-size: 14px;
+        }
+
+        .section {
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .section#products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            padding: 40px 20px;
+            margin-top: 20px;
+        }
+
+        .product {
+            border: 1px solid #ddd;
+            padding: 20px;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .product:hover {
+            transform: translateY(-5px);
+        }
+
+        .image-container {
+            position: relative;
+            min-height: 200px;
+        }
+
+        .loading-spinner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #b88b4a;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .image-container.loaded .loading-spinner {
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .product img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .product img:hover {
+            transform: scale(1.05);
+        }
+
+        .product-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .cta {
+            background: #5c3a21;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        footer {
+            background: #3a2614;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .testimonial {
+            background: #fff4e6;
+            padding: 20px;
+            border-left: 5px solid #b88b4a;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .shop-btn {
+            background-color: #b88b4a;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .shop-btn:hover {
+            background-color: #a47430;
+        }
+
+        .shop-btn.loading {
+            opacity: 0.7;
+            cursor: wait;
+            animation: loading 1s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes loading {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .search-container {
+            margin: 20px 0;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-container input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .filter-options select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #b88b4a;
+            box-shadow: 0 0 0 2px rgba(184,139,74,0.2);
+        }
+
+        .contact-form textarea {
+            min-height: 150px;
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section#products {
+                grid-template-columns: 1fr;
+            }
+            
+            .product img {
+                max-width: 100%;
+            }
+            
+            .contact-form {
+                padding: 0 20px;
+            }
+        }
+
+        .hero {
+            background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .cta-btn {
+            background: #b88b4a;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .cta-btn:hover {
+            background: #a47430;
+            transform: scale(1.05);
+        }
+
+        .cta-btn.outline {
+            background: transparent;
+            border: 2px solid #b88b4a;
+            color: #b88b4a;
+        }
+
+        .cta-btn.outline:hover {
+            background: #b88b4a;
+            color: white;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .hero-pattern {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 20px;
+            background: repeating-linear-gradient(45deg, #b88b4a, #b88b4a 10px, #fff4e6 10px, #fff4e6 20px);
+        }
+
+        .testimonials-carousel {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 0;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #b88b4a;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .newsletter-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            display: none;
+            z-index: 1000;
+        }
+
+        .newsletter-popup h3 {
+            margin: 0 0 10px;
+        }
+
+        .newsletter-popup .close-popup {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .countdown-timer {
+            text-align: center;
+            background: #fff4e6;
+            padding: 10px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .eco-impact {
+            background: #fff4e6;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .progress-container {
+            margin-top: 10px;
+        }
+
+        .progress-bar {
+            background: #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            height: 20px;
+        }
+
+        .progress {
+            background: #b88b4a;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    </style>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Add FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="js/api.js"></script>
+    <script src="js/handlers.js"></script>
+    <script src="js/social.js"></script>
+</head>
+
+<body>
+    <header>
+        <button class="menu-toggle" aria-label="Toggle Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="header-content">
+            <h1>Date Seed Power</h1>
+            <p>Healthy. Sustainable. Natural.</p>
+        </div>
+        <nav>
+            <a href="#products">Products</a>
+            <a href="#benefits">Benefits</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#contact">Contact</a>
+            <a href="#cart" class="cart-icon">🛒 <span class="cart-count">0</span></a>
+        </nav>
+    </header>
+    
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Transform Waste<br>into Wellness</h1>
+            <p class="hero-text">Discover our innovative<br>date seed-powered products</p>
+            <div class="hero-buttons">
+                <button class="cta-btn">Shop Now</button>
+                <button class="cta-btn outline">Learn More</button>
+            </div>
+        </div>
+        <div class="hero-pattern"></div>
+    </div>
+
+    <section class="section" id="products">
+        <div class="container">
+            <h2>Our Products</h2>
+            <div class="search-filters">
+                <div class="search-container">
+                    <input type="search" placeholder="Search products..." aria-label="Search">
+                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="filter-options">
+                    <select aria-label="Sort by">
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="popular">Most Popular</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="products-wrapper">
+                <div class="products-grid">
+                    <div class="product" data-product-id="1">
+                        <div class="image-container">
+                            <img src="images/tea-powder.jpg" alt="Date Seed Tea Powder">
+                            <div class="product-overlay">
+                                <button class="quick-view-btn">Quick View</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Date Seed Tea Powder</h3>
+                            <div class="rating">
+                                <span class="stars">★★★★★</span>
+                                <span class="count">(24 reviews)</span>
+                            </div>
+                            <p class="price">Rs. 50/100g</p>
+                            <div class="size-selector">
+                                <label>Size:</label>
+                                <select class="size-select">
+                                    <option value="100">100g - Rs. 50</option>
+                                    <option value="250">250g - Rs. 110</option>
+                                    <option value="500">500g - Rs. 200</option>
+                                </select>
+                            </div>
+                            <button class="shop-btn" data-product-id="1">Add to Cart</button>
+                            <div class="social-buttons">
+                                <button onclick="socialShare.facebook(window.location.href)" class="social-btn facebook">
+                                    <i class="fab fa-facebook"></i>
+                                </button>
+                                <button onclick="socialShare.twitter(window.location.href, 'Check out this amazing product!')" class="social-btn twitter">
+                                    <i class="fab fa-twitter"></i>
+                                </button>
+                                <button onclick="socialShare.whatsapp('Check out this amazing product!')" class="social-btn whatsapp">
+                                    <i class="fab fa-whatsapp"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product">
+                        <div class="image-container">
+                            <img src="images/face-mask.jpg" alt="Date Seed Face Mask">
+                            <div class="product-overlay">
+                                <button class="quick-view-btn">Quick View</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Date Seed Face Mask</h3>
+                            <div class="rating">
+                                <span class="stars">★★★★★</span>
+                                <span class="count">(18 reviews)</span>
+                            </div>
+                            <p class="price">Rs. 60/unit</p>
+                            <button class="shop-btn">Add to Cart</button>
+                            <div class="social-buttons">
+                                <button onclick="socialShare.facebook(window.location.href)" class="social-btn facebook">
+                                    <i class="fab fa-facebook"></i>
+                                </button>
+                                <button onclick="socialShare.twitter(window.location.href, 'Check out this amazing product!')" class="social-btn twitter">
+                                    <i class="fab fa-twitter"></i>
+                                </button>
+                                <button onclick="socialShare.whatsapp('Check out this amazing product!')" class="social-btn whatsapp">
+                                    <i class="fab fa-whatsapp"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product">
+                        <div class="image-container">
+                            <img src="images/energy-bar.jpg" alt="Date Seed Energy Bar">
+                            <div class="product-overlay">
+                                <button class="quick-view-btn">Quick View</button>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3>Date Seed Energy Bar</h3>
+                            <div class="rating">
+                                <span class="stars">★★★★★</span>
+                                <span class="count">(31 reviews)</span>
+                            </div>
+                            <p class="price">Rs. 40/bar</p>
+                            <button class="shop-btn">Add to Cart</button>
+                            <div class="social-buttons">
+                                <button onclick="socialShare.facebook(window.location.href)" class="social-btn facebook">
+                                    <i class="fab fa-facebook"></i>
+                                </button>
+                                <button onclick="socialShare.twitter(window.location.href, 'Check out this amazing product!')" class="social-btn twitter">
+                                    <i class="fab fa-twitter"></i>
+                                </button>
+                                <button onclick="socialShare.whatsapp('Check out this amazing product!')" class="social-btn whatsapp">
+                                    <i class="fab fa-whatsapp"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="gallery">
+        <h2>Product Gallery</h2>
+        <div class="gallery-grid">
+            <figure class="gallery-item">
+                <img src="images/gallery/process-1.jpg" alt="Production Process">
+                <figcaption>Our Sustainable Production Process</figcaption>
+            </figure>
+            <!-- Add more gallery items -->
+        </div>
+    </section>
+
+    <section class="section" id="video">
+        <h2>See How We Make It</h2>
+        <div class="video-container">
+            <video controls poster="images/video-thumbnail.jpg">
+                <source src="videos/production-process.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </section>
+
+    <section class="section" id="benefits">
+        <h2>Why Choose Us?</h2>
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <i class="fas fa-leaf"></i>
+                <h3>Eco-friendly</h3>
+                <p>Sustainable and environmentally conscious products</p>
+            </div>
+            <div class="benefit-item">
+                <i class="fas fa-users"></i>
+                <h3>Community Support</h3>
+                <p>Supporting local farmers and communities</p>
+            </div>
+            <div class="benefit-item">
+                <i class="fas fa-heart"></i>
+                <h3>Natural Ingredients</h3>
+                <p>100% natural and healthy ingredients</p>
+            </div>
+            <div class="benefit-item">
+                <i class="fas fa-recycle"></i>
+                <h3>Zero Waste</h3>
+                <p>Reducing food waste through innovation</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="testimonials">
+        <h2>What Our Customers Say</h2>
+        <div class="testimonials-carousel">
+            <div class="testimonial">
+                <div class="testimonial-avatar">
+                    <img src="images/avatars/user1.jpg" alt="Priya M" onerror="this.src='https://ui-avatars.com/api/?name=Priya+M'">
+                </div>
+                <div class="rating">★★★★★</div>
+                <blockquote>"The date seed tea is amazing! It's become my daily energy booster. Love that it's sustainable too!"</blockquote>
+                <footer>- Priya M, Bangalore</footer>
+            </div>
+
+            <div class="testimonial">
+                <div class="testimonial-avatar">
+                    <img src="images/avatars/user2.jpg" alt="Rahul S" onerror="this.src='https://ui-avatars.com/api/?name=Rahul+S'">
+                </div>
+                <div class="rating">★★★★★</div>
+                <blockquote>"Energy bars are perfect for my morning workouts. Natural ingredients and great taste!"</blockquote>
+                <footer>- Rahul S, Mumbai</footer>
+            </div>
+
+            <div class="testimonial">
+                <div class="testimonial-avatar">
+                    <img src="images/avatars/user3.jpg" alt="Anjali K" onerror="this.src='https://ui-avatars.com/api/?name=Anjali+K'">
+                </div>
+                <div class="rating">★★★★★</div>
+                <blockquote>"The face mask has done wonders for my skin. It's gentle yet effective. Highly recommend!"</blockquote>
+                <footer>- Anjali K, Delhi</footer>
+            </div>
+
+            <div class="testimonial">
+                <div class="testimonial-avatar">
+                    <img src="images/avatars/user4.jpg" alt="Vikram P" onerror="this.src='https://ui-avatars.com/api/?name=Vikram+P'">
+                </div>
+                <div class="rating">★★★★½</div>
+                <blockquote>"Great products that align with my eco-friendly lifestyle. The packaging is also sustainable!"</blockquote>
+                <footer>- Vikram P, Chennai</footer>
+            </div>
+
+            <div class="testimonial">
+                <div class="testimonial-avatar">
+                    <img src="images/avatars/user5.jpg" alt="Meera R" onerror="this.src='https://ui-avatars.com/api/?name=Meera+R'">
+                </div>
+                <div class="rating">★★★★★</div>
+                <blockquote>"Love supporting a brand that cares about farmers and the environment. The tea is delicious!"</blockquote>
+                <footer>- Meera R, Hyderabad</footer>
+            </div>
+
+            <div class="testimonial">
+                <div class="testimonial-avatar">
+                    <img src="images/avatars/user6.jpg" alt="Arjun T" onerror="this.src='https://ui-avatars.com/api/?name=Arjun+T'">
+                </div>
+                <div class="rating">★★★★★</div>
+                <blockquote>"Finally found energy bars that are both healthy and tasty. Perfect for my busy lifestyle!"</blockquote>
+                <footer>- Arjun T, Pune</footer>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-container">
+            <details>
+                <summary>How are date seeds processed?</summary>
+                <p>Our date seeds are carefully collected, cleaned, and processed...</p>
+            </details>
+            <!-- Add more FAQs -->
+        </div>
+    </section>
+
+    <section class="section" id="blog">
+        <h2>Latest Articles</h2>
+        <div class="blog-grid">
+            <article class="blog-post">
+                <img src="images/blog/health-benefits.jpg" alt="Health Benefits">
+                <h3>Top 5 Health Benefits of Date Seeds</h3>
+                <p>Discover the amazing health benefits...</p>
+                <a href="#" class="read-more">Read More</a>
+            </article>
+            <!-- Add more blog posts -->
+        </div>
+    </section>
+
+    <section class="section" id="recipes">
+        <h2>Healthy Recipes</h2>
+        <div class="recipes-grid">
+            <div class="recipe-card">
+                <img src="images/recipes/smoothie.jpg" alt="Date Seed Smoothie">
+                <div class="recipe-content">
+                    <h3>Energy Smoothie</h3>
+                    <p>Blend with banana and almond milk...</p>
+                    <button class="recipe-btn">View Recipe</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2>Ready to Make the Healthy Switch?</h2>
+        <p>Order now online or find us in your nearest organic store!</p>
+        <button class="shop-btn">Shop Now</button>
+    </section>
+
+    <section class="section" id="contact">
+        <h2>Contact Us</h2>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Get in Touch</h3>
+                <div class="contact-details">
+                    <p><i class="fas fa-envelope"></i> 99220040436@klu.ac.in</p>
+                    <p><i class="fas fa-phone"></i> +91 63748 31305</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Kalasalingam University, Krishnan kovil</p>
+                </div>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <form class="contact-form">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="section" id="eco-impact">
+        <div class="eco-impact">
+            <h3>Our Environmental Impact</h3>
+            <div class="progress-container">
+                <label>Date Seeds Recycled</label>
+                <div class="progress-bar">
+                    <div class="progress" style="width: 75%">
+                        <span>750kg / 1000kg monthly goal</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add WhatsApp Button -->
+   
+    <a href="https://wa.me/918870631503" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+        <span class="tooltip">Chat with us!</span>
+    </a>
+
+    <!-- Add Newsletter Popup -->
+    <div class="newsletter-popup" id="newsletterPopup">
+        <button class="close-popup">&times;</button>
+        <h3>Get 10% Off Your First Order!</h3>
+        <p>Subscribe to our newsletter for healthy tips and exclusive offers.</p>
+        <form id="newsletterForm">
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit" class="cta-btn">Subscribe</button>
+        </form>
+    </div>
+
+    <!-- Add Countdown Timer -->
+    <div class="countdown-timer">
+        <p>Special Offer ends in: <span id="countdown">24:00:00</span></p>
+    </div>
+
+    <!-- Add Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <input type="email" placeholder="Email" required>
+                <input type="password" placeholder="Password" required>
+                <button type="submit" class="shop-btn">Login</button>
+            </form>
+            <p>New user? <a href="#" id="showSignup">Sign up</a></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
